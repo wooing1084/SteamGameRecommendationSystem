@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 dataset/.DS_Store
 .DS_Store
+dataset/users.csv
+dataset/recommendations.csv
