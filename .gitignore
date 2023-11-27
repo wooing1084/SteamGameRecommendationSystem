@@ -162,3 +162,8 @@ dataset/.DS_Store
 .DS_Store
 dataset/users.csv
 dataset/recommendations.csv
+dataset/pre_recommendations.csv
+dataset/pre_steam.csv
+dataset/steam.csv
+dataset/preprocessed_games.csv
+dataset/steamspy_tag_data.csv
