@@ -78,6 +78,7 @@ print(test_X.shape)
 
 all_precisions = []
 all_recalls = []
+hitCount = 0
 
 for user in over_10_users:
     user_test_X = test_X[test_X["user_id"] == user]
@@ -87,6 +88,8 @@ for user in over_10_users:
 
     if not actual_Y.empty and not predict_Y.empty:
         hit = len(set(actual_Y["title"]) & set(predict_Y["title"]))
+        if hit > 0:
+            hitCount += 1
         precision = hit / len(predict_Y["title"])
         recall = hit / len(actual_Y["title"])
         all_precisions.append(precision)
@@ -95,6 +98,8 @@ for user in over_10_users:
 
 average_precision = sum(all_precisions) / len(all_precisions)
 average_recall = sum(all_recalls) / len(all_recalls)
+HitRate = hitCount / len(over_10_users)
 
 print("average_precision:", average_precision)
 print("average_recall:", average_recall)
+print("HitRate:", HitRate)
