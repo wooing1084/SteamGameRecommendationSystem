@@ -1,6 +1,9 @@
 # Importing libraries
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics.pairwise import cosine_similarity
 
 # Read file
 merged_df = pd.read_csv("datasets/merged_steam_games_.csv")
@@ -17,8 +20,6 @@ content_df = merged_df[content_columns]
 content_df.dropna(inplace=True)
 print(content_df.head(10))
 
-# Standardization
-from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
 content_df = pd.DataFrame(scaler.fit_transform(content_df), columns=content_columns)
@@ -33,8 +34,6 @@ def Recommend_Games(user_id):
     # Vector representing the user's preference
     user_vector = user_df.iloc[:, 31:58].mean().values.reshape(1, -1)
 
-    from sklearn.metrics.pairwise import cosine_similarity
-
     sim_scores = cosine_similarity(user_vector, content_df)
 
     rc_games = sim_scores.argsort()[0][::-1]
@@ -47,7 +46,6 @@ user_id = 7606333
 recommendations = Recommend_Games(user_id)
 print(f"10 Games Recommend to {user_id} : \n{recommendations}")
 
-from sklearn.model_selection import train_test_split
 
 user_game_count = pd.DataFrame(merged_df.groupby("user_id")["app_id"].count())
 # print(user_game_count[user_game_count['user_id'] > 10].shape)
